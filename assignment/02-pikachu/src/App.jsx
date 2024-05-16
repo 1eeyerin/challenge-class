@@ -1,77 +1,81 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
-const SIZE = 40;
+const MOVE_SIZE = 40;
 const MAX_BLOCK = 9;
+const LIMIT_POS = MOVE_SIZE * MAX_BLOCK;
 
 const App = () => {
-  const [{ x, y }, setPosition] = useState({ x: 0, y: 0 });
-  const [{ translateY, scaleX }, setTransform] = useState({
+  const [{ translateY, scaleX, x, y }, setPosition] = useState({
+    x: 0,
+    y: 0,
     translateY: "0px",
     scaleX: 1,
   });
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      switch (event.code) {
-        case "ArrowUp":
-          setPosition((prev) =>
-            prev.y <= 0 ? prev : { ...prev, y: prev.y - SIZE }
-          );
-          break;
-        case "ArrowDown":
-          setPosition((prev) =>
-            prev.y >= SIZE * MAX_BLOCK ? prev : { ...prev, y: prev.y + SIZE }
-          );
-          break;
-        case "ArrowLeft":
-          setPosition((prev) =>
-            prev.x <= 0 ? prev : { ...prev, x: prev.x - SIZE }
-          );
-          setTransform((prev) => ({ ...prev, scaleX: -1 }));
-          break;
-        case "ArrowRight":
-          setPosition((prev) =>
-            prev.x >= SIZE * MAX_BLOCK ? prev : { ...prev, x: prev.x + SIZE }
-          );
-          setTransform((prev) => ({ ...prev, scaleX: 1 }));
-          break;
-        case "Space":
-          setTransform((prev) => ({ ...prev, translateY: "-30px" }));
-
-          setTimeout(() => {
-            setTransform((prev) => ({ ...prev, translateY: "0px" }));
-          }, 150);
-          break;
-
-        default:
-          break;
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
+    const keyDownHandler = handleKeyDown(setPosition);
+    window.addEventListener("keydown", keyDownHandler);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", keyDownHandler);
     };
   }, []);
 
   return (
-    <>
-      <div className="playground">
-        <img
-          src="/src/assets/pikachu.png"
-          alt=""
-          className="pika"
-          style={{
-            left: `${x}px`,
-            top: `${y}px`,
-            transform: `translateY(${translateY}) scaleX(${scaleX})`,
-          }}
-        />
-      </div>
-    </>
+    <div className="playground">
+      <img
+        src="/src/assets/pikachu.png"
+        alt=""
+        className="pika"
+        style={{
+          left: `${x}px`,
+          top: `${y}px`,
+          transform: `translateY(${translateY}) scaleX(${scaleX})`,
+        }}
+      />
+    </div>
   );
+};
+
+const updatePosition = (axis, delta, limit) => (prev) => {
+  const newValue = prev[axis] + delta;
+  return newValue < 0 || newValue > limit
+    ? prev
+    : { ...prev, [axis]: newValue };
+};
+
+const handleKeyDown = (setPosition) => (event) => {
+  switch (event.code) {
+    case "ArrowUp":
+      setPosition(updatePosition("y", -MOVE_SIZE, LIMIT_POS));
+      break;
+    case "ArrowDown":
+      setPosition(updatePosition("y", MOVE_SIZE, LIMIT_POS));
+      break;
+    case "ArrowLeft":
+      setPosition((prev) => ({
+        ...updatePosition("x", -MOVE_SIZE, LIMIT_POS)(prev),
+        scaleX: -1,
+      }));
+      break;
+    case "ArrowRight":
+      setPosition((prev) => ({
+        ...updatePosition("x", MOVE_SIZE, LIMIT_POS)(prev),
+        scaleX: 1,
+      }));
+      break;
+    case "Space":
+      setPosition((prev) => ({ ...prev, translateY: "-30px" }));
+
+      setTimeout(() => {
+        setPosition((prev) => ({ ...prev, translateY: "0px" }));
+      }, 150);
+      break;
+
+    default:
+      break;
+  }
 };
 
 export default App;
