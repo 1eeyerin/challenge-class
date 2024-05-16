@@ -1,0 +1,15 @@
+.playground {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  background: url(/src/assets/grass.png) repeat;
+}
+
+.pika {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  transition: 0.4s;
+}
