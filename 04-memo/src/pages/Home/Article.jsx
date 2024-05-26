@@ -4,7 +4,10 @@ import { formatDate } from '../../utils/timeUtils';
 import TextArea from './TextArea';
 
 const Article = () => {
-  const createdAt = useSelector(({ memo }) => memo.memos[0].createdAt);
+  const createdAt = useSelector(
+    ({ memo }) =>
+      memo.memos.find((item) => item.id === memo.selectedMemoId).createdAt,
+  );
 
   const formattedDate = formatDate(createdAt, 'YYYY년 M월 D일, A h:mm').toKor();
 
