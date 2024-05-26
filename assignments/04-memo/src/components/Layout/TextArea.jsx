@@ -1,24 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { debounce } from 'lodash';
 import styled from 'styled-components';
 import usePreviousValue from '@/hooks/usePreviousValue';
-import useShallowEqualSelector from '@/hooks/useShallowEqualSelector';
 import { updateMemoContent } from '@/redux/slices/memoSlice';
 
-const TextArea = () => {
-  const { content, selectedMemoId } = useShallowEqualSelector(
-    ({ memo: { memos, selectedMemoId } }) => {
-      return {
-        content: memos.find((item) => item.id === selectedMemoId).content,
-        selectedMemoId,
-      };
-    },
-  );
+const TextArea = ({ id }) => {
   const textareaRef = useRef(null);
   const dispatch = useDispatch();
-  const prevSelectedMemoId = usePreviousValue(selectedMemoId);
+  const prevMemoId = usePreviousValue(id);
   const [textAreaValue, setTextAreaValue] = useState('');
+
+  const content = useSelector(
+    ({ memo: { memos } }) => memos.find((item) => item.id === id)?.content,
+  );
 
   const debouncedUpdateMemoContent = debounce((value) => {
     dispatch(updateMemoContent(value));
@@ -30,11 +25,11 @@ const TextArea = () => {
   };
 
   useEffect(() => {
-    if (prevSelectedMemoId !== selectedMemoId) {
+    if (prevMemoId !== id) {
       setTextAreaValue(content);
       textareaRef.current.focus();
     }
-  }, [selectedMemoId, content, prevSelectedMemoId]);
+  }, [id, content, prevMemoId]);
 
   return (
     <StyledTextarea

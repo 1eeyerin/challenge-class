@@ -1,18 +1,10 @@
-import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import useShallowEqualSelector from '@/hooks/useShallowEqualSelector';
-import { formatDate } from '@/utils';
+import { ellipsisText, formatDate } from '@/utils';
 import { ellipsisStyle } from '@/styles/utils';
-import { updateSelectedMemoId } from '@/redux/slices/memoSlice';
-
-const formatMemoContent = (content, length) => {
-  if (content.length >= length) return content.slice(0, length) + '...';
-
-  return content;
-};
 
 const AsideList = () => {
-  const dispatch = useDispatch();
   const { memos, selectedMemoId } = useShallowEqualSelector(({ memo }) => {
     return {
       memos: memo.memos,
@@ -20,28 +12,21 @@ const AsideList = () => {
     };
   });
 
-  const onClick = ({ target }) => {
-    const buttonId = target.dataset.id || target.closest('button')?.dataset?.id;
-
-    if (!buttonId) return;
-    dispatch(updateSelectedMemoId(buttonId));
-  };
-
   return (
-    <StyledUl onClick={onClick}>
+    <StyledUl>
       {[...memos].map((memo) => (
         <li key={memo.id}>
-          <StyledButton
+          <StyledLink
+            to={`/detail/${memo.id}`}
             $selected={selectedMemoId === memo.id}
-            data-id={memo.id}
           >
             <StyledStrong>
-              {formatMemoContent(memo.content, 14) || '새로운 메모'}
+              {ellipsisText(memo.content, 14) || '새로운 메모'}
             </StyledStrong>
             <StyledTime>
               {formatDate(memo.createdAt, 'A h:mm').toKor()}
             </StyledTime>
-          </StyledButton>
+          </StyledLink>
         </li>
       ))}
     </StyledUl>
@@ -56,7 +41,7 @@ const StyledUl = styled.ul`
   margin: 0px;
 `;
 
-const StyledButton = styled.button`
+const StyledLink = styled(Link)`
   height: 56px;
   border-radius: 4px;
   background-color: ${({ $selected }) =>

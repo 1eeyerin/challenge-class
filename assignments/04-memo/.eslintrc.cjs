@@ -34,6 +34,7 @@ module.exports = {
   rules: {
     // eslint-plugin-import 사용으로 인한 styled-components 불러오기시 에러 발생
     "import/no-named-as-default": "off",
+    "react/prop-types": "off",
     "react/jsx-no-target-blank": "off",
     "react-refresh/only-export-components": [
       "warn",
