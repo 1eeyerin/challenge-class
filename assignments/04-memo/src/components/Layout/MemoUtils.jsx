@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import useShallowEqualSelector from '@/hooks/useShallowEqualSelector';
 import { addMemo, deleteMemo } from '@/redux/slices/memoSlice';
 
-const AsideHeader = () => {
+const MemoUtils = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isUpdating, setIsUpdating] = useState(false);
@@ -75,4 +75,4 @@ const StyledButton = styled.button`
   }
 `;
 
-export default AsideHeader;
+export default MemoUtils;

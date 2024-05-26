@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
-import Article from '@/components/Layout/Article';
+import MemoEditor from '@/components/Layout/MemoEditor';
 
 const Detail = () => {
   const { id } = useParams();
 
-  return <Article id={id} />;
+  return <MemoEditor id={id} />;
 };
 
 export default Detail;

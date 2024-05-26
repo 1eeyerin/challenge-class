@@ -17,7 +17,7 @@ const TextArea = ({ id }) => {
 
   const debouncedUpdateMemoContent = debounce((value) => {
     dispatch(updateMemoContent(value));
-  }, 100);
+  }, 350);
 
   const handleChange = ({ target }) => {
     setTextAreaValue(target.value);

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { setLocalStorage } from '@/utils';
-import Aside from './Aside';
+import Sidebar from './Sidebar';
 
 const Layout = () => {
   const memos = useSelector(({ memo }) => memo.memos);
@@ -14,7 +14,7 @@ const Layout = () => {
 
   return (
     <StyledMain>
-      <Aside />
+      <Sidebar />
       <Outlet />
     </StyledMain>
   );

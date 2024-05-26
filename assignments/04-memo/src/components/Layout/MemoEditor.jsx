@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { formatDate } from '@/utils';
 import TextArea from './TextArea';
 
-const Article = ({ id }) => {
+const MemoEditor = ({ id }) => {
   const createdAt = useSelector(
     ({ memo }) => memo.memos.find((item) => item.id === id)?.createdAt,
   );
@@ -31,4 +31,4 @@ const StyledDate = styled.time`
   color: var(--color-foreground);
 `;
 
-export default Article;
+export default MemoEditor;

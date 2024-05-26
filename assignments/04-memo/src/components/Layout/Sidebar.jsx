@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import AsideHeader from './AsideHeader';
-import AsideList from './AsideList';
+import MemoList from './MemoList';
+import MemoUtils from './MemoUtils';
 
-const Aside = () => {
+const Sidebar = () => {
   return (
     <StyledAside>
-      <AsideHeader />
-      <AsideList />
+      <MemoUtils />
+      <MemoList />
     </StyledAside>
   );
 };
@@ -19,4 +19,4 @@ const StyledAside = styled.aside`
   flex-direction: column;
 `;
 
-export default Aside;
+export default Sidebar;

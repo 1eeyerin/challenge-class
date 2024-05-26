@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
-import Article from '@/components/Layout/Article';
+import MemoEditor from '@/components/Layout/MemoEditor';
 
 const Home = () => {
   const selectedMemoId = useSelector(({ memo }) => memo.selectedMemoId);
 
-  return <Article id={selectedMemoId} />;
+  return <MemoEditor id={selectedMemoId} />;
 };
 
 export default Home;

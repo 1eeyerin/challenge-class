@@ -4,7 +4,7 @@ import useShallowEqualSelector from '@/hooks/useShallowEqualSelector';
 import { ellipsisText, formatDate } from '@/utils';
 import { ellipsisStyle } from '@/styles/utils';
 
-const AsideList = () => {
+const MemoList = () => {
   const { memos, selectedMemoId } = useShallowEqualSelector(({ memo }) => {
     return {
       memos: memo.memos,
@@ -64,4 +64,4 @@ const StyledTime = styled.time`
   color: #404040;
 `;
 
-export default AsideList;
+export default MemoList;
