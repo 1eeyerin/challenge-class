@@ -1,13 +1,24 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import useShallowEqualSelector from '@/hooks/useShallowEqualSelector';
 import { addMemo, deleteMemo } from '@/redux/slices/memoSlice';
 
 const AsideHeader = () => {
-  const memoLength = useSelector(({ memo }) => memo.memos.length);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isUpdating, setIsUpdating] = useState(false);
+  const { memoLength, selectedMemoId } = useShallowEqualSelector(({ memo }) => {
+    return {
+      memoLength: memo.memos.length,
+      selectedMemoId: memo.selectedMemoId,
+    };
+  });
 
   const handleAddMemo = () => {
     dispatch(addMemo());
+    setIsUpdating(true);
   };
 
   const handleDeleteMemo = () => {
@@ -17,7 +28,14 @@ const AsideHeader = () => {
     }
 
     dispatch(deleteMemo());
+    setIsUpdating(true);
   };
+
+  useEffect(() => {
+    if (!isUpdating) return;
+    navigate(`/detail/${selectedMemoId}`);
+    setIsUpdating(false);
+  }, [selectedMemoId, navigate, isUpdating]);
 
   return (
     <StyledHeader>

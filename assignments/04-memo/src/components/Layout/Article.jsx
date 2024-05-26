@@ -3,10 +3,9 @@ import styled from 'styled-components';
 import { formatDate } from '@/utils';
 import TextArea from './TextArea';
 
-const Article = () => {
+const Article = ({ id }) => {
   const createdAt = useSelector(
-    ({ memo }) =>
-      memo.memos.find((item) => item.id === memo.selectedMemoId).createdAt,
+    ({ memo }) => memo.memos.find((item) => item.id === id)?.createdAt,
   );
 
   const formattedDate = formatDate(createdAt, 'YYYY년 M월 D일, A h:mm').toKor();
@@ -14,7 +13,7 @@ const Article = () => {
   return (
     <StyledArticle>
       <StyledDate>{formattedDate}</StyledDate>
-      <TextArea />
+      <TextArea id={id} />
     </StyledArticle>
   );
 };
