@@ -14,6 +14,6 @@
 
 ## 03. 추가로 도전해 볼 만한 내용
 
-- [ ] React Router v6의 nested router를 사용해서 각 메모의 상세를 라우트로 구현해 보기
+- [x] React Router v6의 nested router를 사용해서 각 메모의 상세를 라우트로 구현해 보기
 - [x] localStorage API를 사용하여 웹사이트를 껐다 다시 켜도 데이터가 남아 있도록 해 보기
 - [x] 사용자 입력을 debounce 처리해 보기
