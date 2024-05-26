@@ -1,15 +1,20 @@
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { formatDate } from '../../utils/timeUtils';
+import TextArea from './TextArea';
 
 const Article = () => {
+  const createdAt = useSelector(({ memo }) => memo.memos[0].createdAt);
+
+  const formattedDate = formatDate(createdAt, 'YYYY년 M월 D일, A h:mm').toKor();
+
   return (
     <StyledArticle>
-      <StyledDate>2024년 5월 26일, 오전 3:05</StyledDate>
-      <StyledTextarea />
+      <StyledDate>{formattedDate}</StyledDate>
+      <TextArea />
     </StyledArticle>
   );
 };
-
-export default Article;
 
 const StyledArticle = styled.article`
   display: flex;
@@ -24,9 +29,4 @@ const StyledDate = styled.time`
   color: var(--color-foreground);
 `;
 
-const StyledTextarea = styled.textarea`
-  all: unset;
-  flex-grow: 1;
-  font-size: 15px;
-  line-height: 1.66;
-`;
+export default Article;
