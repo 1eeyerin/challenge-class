@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { formatDate } from '../../utils/timeUtils';
+import { formatDate } from '@/utils';
 import TextArea from './TextArea';
 
 const Article = () => {

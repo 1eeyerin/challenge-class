@@ -1,10 +1,10 @@
-import { useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import { updateMemoContent } from '../../redux/slices/memoSlice';
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { debounce } from 'lodash';
-import useShallowEqualSelector from '../../hooks/useShallowEqualSelector';
-import usePreviousValue from '../../hooks/usePreviousValue';
+import styled from 'styled-components';
+import usePreviousValue from '@/hooks/usePreviousValue';
+import useShallowEqualSelector from '@/hooks/useShallowEqualSelector';
+import { updateMemoContent } from '@/redux/slices/memoSlice';
 
 const TextArea = () => {
   const { content, selectedMemoId } = useShallowEqualSelector(
