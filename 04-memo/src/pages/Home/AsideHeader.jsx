@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { addMemo, deleteMemo } from '../../redux/slices/memoSlice';
+import { addMemo, deleteMemo } from '@/redux/slices/memoSlice';
 
 const AsideHeader = () => {
   const memoLength = useSelector(({ memo }) => memo.memos.length);

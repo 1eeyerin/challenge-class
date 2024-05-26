@@ -1,10 +1,10 @@
-import styled from 'styled-components';
-import Aside from './Aside';
-import Article from './Article';
-import { getLocalStorage, setLocalStorage } from '../../utils/localStorage';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { initializeMemos } from '../../redux/slices/memoSlice';
+import styled from 'styled-components';
+import { getLocalStorage, setLocalStorage } from '@/utils';
+import { initializeMemos } from '@/redux/slices/memoSlice';
+import Article from './Article';
+import Aside from './Aside';
 
 const Home = () => {
   const dispatch = useDispatch();

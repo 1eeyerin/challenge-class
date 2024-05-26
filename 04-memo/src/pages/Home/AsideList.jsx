@@ -1,9 +1,9 @@
-import styled from 'styled-components';
-import { formatDate } from '../../utils/timeUtils';
-import { ellipsisStyle } from '../../styles/utils';
-import useShallowEqualSelector from '../../hooks/useShallowEqualSelector';
-import { updateSelectedMemoId } from '../../redux/slices/memoSlice';
 import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import useShallowEqualSelector from '@/hooks/useShallowEqualSelector';
+import { formatDate } from '@/utils';
+import { ellipsisStyle } from '@/styles/utils';
+import { updateSelectedMemoId } from '@/redux/slices/memoSlice';
 
 const formatMemoContent = (content, length) => {
   if (content.length >= length) return content.slice(0, length) + '...';
