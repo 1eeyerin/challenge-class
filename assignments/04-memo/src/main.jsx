@@ -8,10 +8,10 @@ import GlobalStyles from './styles/globalStyles';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <>
-        <GlobalStyles />
-        <App />
-      </>
+      <GlobalStyles />
+      <App />
     </Provider>
   </React.StrictMode>,
 );
+
+//리액트 컴포넌트는 오직 하나의 태그만 반환한다

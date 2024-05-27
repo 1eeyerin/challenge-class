@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { debounce } from 'lodash';
 import styled from 'styled-components';
@@ -9,24 +9,28 @@ const TextArea = ({ id }) => {
   const textareaRef = useRef(null);
   const dispatch = useDispatch();
   const prevMemoId = usePreviousValue(id);
-  const [textAreaValue, setTextAreaValue] = useState('');
+  const [textArea, setTextArea] = useState('');
 
   const content = useSelector(
     ({ memo: { memos } }) => memos.find((item) => item.id === id)?.content,
   );
 
-  const debouncedUpdateMemoContent = debounce((value) => {
-    dispatch(updateMemoContent(value));
-  }, 350);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedUpdateMemoContent = useCallback(
+    debounce((value) => {
+      dispatch(updateMemoContent(value));
+    }, 350),
+    [],
+  );
 
   const handleChange = ({ target }) => {
-    setTextAreaValue(target.value);
+    setTextArea(target.value);
     debouncedUpdateMemoContent(target.value);
   };
 
   useEffect(() => {
     if (prevMemoId !== id) {
-      setTextAreaValue(content);
+      setTextArea(content);
       textareaRef.current.focus();
     }
   }, [id, content, prevMemoId]);
@@ -34,7 +38,7 @@ const TextArea = ({ id }) => {
   return (
     <StyledTextarea
       ref={textareaRef}
-      value={textAreaValue || ''}
+      value={textArea || ''}
       onChange={handleChange}
     />
   );

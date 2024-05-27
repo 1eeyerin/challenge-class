@@ -14,7 +14,7 @@ const MemoList = () => {
 
   return (
     <StyledUl>
-      {[...memos].map((memo) => (
+      {memos.map((memo) => (
         <li key={memo.id}>
           <StyledLink
             to={`/detail/${memo.id}`}
