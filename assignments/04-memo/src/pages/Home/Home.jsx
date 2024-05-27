@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import MemoEditor from '@/components/Layout/MemoEditor';
+import MemoEditor from '@/components/MemoEditor';
 
 const Home = () => {
   const selectedMemoId = useSelector(({ memo }) => memo.selectedMemoId);

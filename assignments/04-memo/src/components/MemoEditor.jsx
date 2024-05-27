@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { formatDate } from '@/utils';
-import TextArea from './TextArea';
+import TextArea from './Layout/TextArea';
 
 const MemoEditor = ({ id }) => {
   const createdAt = useSelector(

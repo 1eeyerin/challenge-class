@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import MemoEditor from '@/components/Layout/MemoEditor';
+import MemoEditor from '@/components/MemoEditor';
 
 const Detail = () => {
   const { id } = useParams();
