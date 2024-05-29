@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import InputField from "./components/InputField";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className={styles.container}>
+      <form className={styles.form}>
+        <h1 className={styles.title}>토스트 컨트롤러</h1>
+        <div className={styles.inputFields}>
+          <InputField
+            label="제목 (필수)"
+            defaultValue="Scheduled: Catch up"
+            required
+          />
+          <InputField
+            label="내용 (필수)"
+            defaultValue="Friday, February 10, 2023 at 5:57 PM"
+            required
+          />
+          <InputField
+            label="노출 시간(ms) (선택)"
+            defaultValue="2000"
+            type="number"
+          />
+        </div>
+        <button className={styles.button}>토스트 띄우기</button>
+      </form>
+    </div>
+  );
+};
 
-export default App
+const styles = {
+  container: [
+    "flex",
+    "flex-col",
+    "items-center",
+    "justify-center",
+    "h-screen",
+    "w-screen",
+  ].join(" "),
+  form: ["w-80", "flex", "flex-col", "gap-6"].join(" "),
+  title: ["text-2xl", "font-semibold", "text-center"].join(" "),
+  button: [
+    "bg-black",
+    "text-white",
+    "py-3",
+    "font-medium",
+    "rounded-md",
+    "text-[15px]",
+    "hover:bg-black/80",
+    "transition",
+  ].join(" "),
+  inputFields: ["flex", "flex-col", "gap-4"].join(" "),
+};
+
+export default App;
