@@ -1,13 +1,8 @@
-import { useShallow } from "zustand/react/shallow";
 import useLoginStore from "../zustand/loginStore";
 
 const Button = () => {
-  const { login, logout, isLoggedIn } = useLoginStore(
-    useShallow((state) => ({
-      login: state.login,
-      logOut: state.logout,
-    }))
-  );
+  const { login, logout } = useLoginStore((state) => state.functions);
+  const isLoggedIn = useLoginStore((state) => state.isLoggedIn);
   // useShallowEqualSelector처럼 useShallow를 쓰면 된다
   // useSelector 같은건데 함수까지 다 한꺼번에 뽑아올 수 있다
   // 불필요한 리렌더링을 막기 위해서

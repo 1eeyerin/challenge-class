@@ -7,11 +7,13 @@ const useLoginStore = create(
     immer((set, get) => ({
       isLoggedIn: false,
 
-      login: () => {
-        const prevState = get();
-        set({ isLoggedIn: !prevState.isLoggedIn });
+      functions: {
+        login: () => {
+          const prevState = get();
+          set({ isLoggedIn: !prevState.isLoggedIn });
+        },
+        logout: () => set({ isLoggedIn: false }),
       },
-      logout: () => set({ isLoggedIn: false }),
     })),
     {
       name: "login",
@@ -40,5 +42,7 @@ const useLoginStore = create(
 
 // async를 써야할때 get으로 가져올 수도 있겠다
 // 또는 귀찮은 작업을 하거나 코드가 많으면 저렇게 미리 get으로 prev값을 가져와서 작업한 뒤에 어주는 게 편하겠네용!
+
+// 리렌더링을 막으려고 functions 를 감쌌다 (승우튜터님의 아이디어)
 
 export default useLoginStore;
