@@ -1,30 +1,34 @@
 import InputField from "./components/InputField";
+import ToastContainer from "./components/ToastContainer";
 
 const App = () => {
   return (
-    <div className={styles.container}>
-      <form className={styles.form}>
-        <h1 className={styles.title}>토스트 컨트롤러</h1>
-        <div className={styles.inputFields}>
-          <InputField
-            label="제목 (필수)"
-            defaultValue="Scheduled: Catch up"
-            required
-          />
-          <InputField
-            label="내용 (필수)"
-            defaultValue="Friday, February 10, 2023 at 5:57 PM"
-            required
-          />
-          <InputField
-            label="노출 시간(ms) (선택)"
-            defaultValue="2000"
-            type="number"
-          />
-        </div>
-        <button className={styles.button}>토스트 띄우기</button>
-      </form>
-    </div>
+    <>
+      <div className={styles.container}>
+        <form className={styles.form}>
+          <h1 className={styles.title}>토스트 컨트롤러</h1>
+          <div className={styles.inputFields}>
+            <InputField
+              label="제목 (필수)"
+              defaultValue="Scheduled: Catch up"
+              required
+            />
+            <InputField
+              label="내용 (필수)"
+              defaultValue="Friday, February 10, 2023 at 5:57 PM"
+              required
+            />
+            <InputField
+              label="노출 시간(ms) (선택)"
+              defaultValue="2000"
+              type="number"
+            />
+          </div>
+          <button className={styles.button}>토스트 띄우기</button>
+        </form>
+      </div>
+      <ToastContainer />
+    </>
   );
 };
 
