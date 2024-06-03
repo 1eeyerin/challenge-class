@@ -27,6 +27,7 @@ const Home = () => {
               label="제목 (필수)"
               name="title"
               defaultValue="Scheduled: Catch up"
+              autoFocus
             />
             <InputField
               label="내용 (필수)"
