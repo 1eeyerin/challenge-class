@@ -1,9 +1,14 @@
 import { create } from "zustand";
 
-const useCounterStore = create((set) => ({
+// 1depth만 immer 지원함
+const useCounterStore = create((set, get) => ({
   count: 0,
-  plus: () => set((prev) => ({ count: prev.count + 1 })),
-  minus: () => set((prev) => ({ count: prev.count - 1 })),
+  increase: () => set((state) => ({ count: state.count + 1 })),
+  decrease: () => set((state) => ({ count: state.count - 1 })),
+  doubleCount: () => {
+    const currentCount = get().count;
+    set({ count: currentCount * 2 });
+  },
 }));
 
 export default useCounterStore;
