@@ -1,26 +1,18 @@
 import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
 const useLoginStore = create(
-  persist(
-    immer((set, get) => ({
-      isLoggedIn: false,
+  immer((set, get) => ({
+    isLoggedIn: false,
 
-      functions: {
-        login: () => {
-          const prevState = get();
-          set({ isLoggedIn: !prevState.isLoggedIn });
-        },
-        logout: () => set({ isLoggedIn: false }),
+    functions: {
+      login: () => {
+        const prevState = get();
+        set({ isLoggedIn: !prevState.isLoggedIn });
       },
-    })),
-    {
-      name: "login",
-      storage: createJSONStorage(() => localStorage),
-      // 이거 안 쓰면 기본적으로 로컬스토리지래요
-    }
-  )
+      logout: () => set({ isLoggedIn: false }),
+    },
+  }))
 );
 
 // set도 함수다, setState인가?

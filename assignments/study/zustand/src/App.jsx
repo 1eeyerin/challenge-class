@@ -1,16 +1,19 @@
-import { useState } from "react";
 import "./App.css";
-import Button from "./components/Button";
-import Display from "./components/Display";
+import useCounterStore from "./zustand/counterStore";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const { count, plus, minus } = useCounterStore((count) => count);
 
   return (
-    <main>
-      <Display />
-      <Button />
-    </main>
+    <>
+      <span>{count}</span>
+      <button type="button" onClick={plus}>
+        증가
+      </button>
+      <button type="button" onClick={minus}>
+        감소
+      </button>
+    </>
   );
 }
 
