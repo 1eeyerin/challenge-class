@@ -1,24 +1,35 @@
-import "./App.css";
-import useCounterStore from "./zustand/counterStore";
+import { useRef } from "react";
+import useStore from "./zustand/useStore";
 
 function App() {
-  const { count, increase, decrease, doubleCount } = useCounterStore(
-    (count) => count
-  );
+  const todoRef = useRef(null);
+  const { todos, addTodo, removeTodo, toggleTodo, clearCompleted } = useStore();
+
+  const handleAddTodo = () => {
+    addTodo(todoRef.current.value);
+    todoRef.current.value = "";
+  };
 
   return (
-    <>
-      <span>{count}</span>
-      <button type="button" onClick={increase}>
-        증가
-      </button>
-      <button type="button" onClick={doubleCount}>
-        get을 이용하여 현재 값에 2배 증가
-      </button>
-      <button type="button" onClick={decrease}>
-        감소
-      </button>
-    </>
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h1>Todo List</h1>
+      <input type="text" ref={todoRef} />
+      <button onClick={handleAddTodo}>Add Todo</button>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => toggleTodo(todo.id)}
+            />
+            {todo.text}
+            <button onClick={() => removeTodo(todo.id)}>Remove</button>
+          </li>
+        ))}
+      </ul>
+      <button onClick={clearCompleted}>Clear Completed</button>
+    </div>
   );
 }
 
