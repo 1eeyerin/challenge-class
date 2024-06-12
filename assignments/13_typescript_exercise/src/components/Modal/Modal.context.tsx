@@ -20,14 +20,17 @@ export const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   );
 
   const open: ModalContextValue["open"] = (element) => {
-    console.log(element);
+    setModalElement(element);
   };
 
-  const close: ModalContextValue["close"] = () => {};
+  const close: ModalContextValue["close"] = () => {
+    setModalElement(null);
+  };
 
   return (
     <ModalContext.Provider value={{ open, close }}>
       {children}
+      {modalElement}
     </ModalContext.Provider>
   );
 };
