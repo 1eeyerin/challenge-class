@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 
 import { VariantProps, cva } from "class-variance-authority";
+import Link from "next/link";
 
 const buttonVariants = cva(
   "px-2.5 py-0.5 rounded-full hover:brightness-90 active:brightness-75",
@@ -40,7 +41,11 @@ const buttonVariants = cva(
 
 type ButtonVariant = VariantProps<typeof buttonVariants>;
 
-type ButtonProps = {} & ButtonVariant & React.ComponentProps<"button">;
+type ButtonProps = {} & ButtonVariant &
+  (
+    | ({} & React.ComponentProps<"button">)
+    | ({ href: string } & React.ComponentProps<typeof Link>)
+  );
 
 const Button = ({
   children,
@@ -49,6 +54,14 @@ const Button = ({
   variant,
   ...props
 }: PropsWithChildren<ButtonProps>) => {
+  if ("href" in props) {
+    return (
+      <Link className={buttonVariants({ intent, size, variant })} {...props}>
+        {children}
+      </Link>
+    );
+  }
+
   return (
     <button className={buttonVariants({ intent, size, variant })} {...props}>
       {children}
