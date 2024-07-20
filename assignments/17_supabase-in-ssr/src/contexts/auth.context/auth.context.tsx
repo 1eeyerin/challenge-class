@@ -51,7 +51,7 @@ export function AuthProvider({
     if (!email || !password) return alert("이메일, 비밀번호 모두 채워 주세요.");
 
     const data = { email, password };
-    const response = await fetch("http://localhost:3001/api/auth/log-in", {
+    const response = await fetch("http://localhost:3000/api/auth/log-in", {
       method: "POST",
       body: JSON.stringify(data),
     });
@@ -63,7 +63,7 @@ export function AuthProvider({
   const logOut = async () => {
     if (!me) return alert("로그인하고 눌러주세요");
 
-    await fetch("http://localhost:3001/api/auth/log-out", { method: "DELETE" });
+    await fetch("http://localhost:3000/api/auth/log-out", { method: "DELETE" });
 
     setMe(null);
   };
@@ -73,7 +73,7 @@ export function AuthProvider({
     if (!email || !password) return alert("이메일, 비밀번호 모두 채워 주세요.");
 
     const data = { email, password };
-    const response = await fetch("http://localhost:3001/api/auth/sign-up", {
+    const response = await fetch("http://localhost:3000/api/auth/sign-up", {
       method: "POST",
       body: JSON.stringify(data),
     });
@@ -83,7 +83,7 @@ export function AuthProvider({
   };
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/auth/me").then(async (response) => {
+    fetch("http://localhost:3000/api/auth/me").then(async (response) => {
       if (response.status === 200) {
         const {
           data: { user },
